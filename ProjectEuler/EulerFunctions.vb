@@ -27,4 +27,12 @@ Module EulerFunctions
             Return False
         End If
     End Function
+
+    Function MultipleString(strInput As String)
+        Dim answer As Long = 1
+        For Each c In strInput
+            answer = answer * c.ToString()
+        Next
+        Return answer
+    End Function
 End Module

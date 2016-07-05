@@ -5,12 +5,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ProjectEuler"
         mc:Ignorable="d"
-        Title="MainWindow" Height="227" Width="525">
-    <Grid Margin="0,0,0,-6">
-        <Button x:Name="btnExecute" Content="Execute" HorizontalAlignment="Left" Margin="205,165,0,0" VerticalAlignment="Top" Width="75" RenderTransformOrigin="0.067,-0.5"/>
-        <TextBox x:Name="tbQuestion" HorizontalAlignment="Left" Height="150" Margin="285,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="222" Text="Select Question." HorizontalScrollBarVisibility="Auto"/>
-        <TextBox x:Name="tbAnswer" HorizontalAlignment="Left" Height="20" Margin="285,165,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="222"/>
-        <ListView x:Name="lvQuestions" HorizontalAlignment="Left" Height="150" Margin="10,10,0,0" VerticalAlignment="Top" Width="270">
+        Title="MainWindow" Height="337" Width="549">
+    <Grid Margin="0,0,-23,-31" Height="337" VerticalAlignment="Top">
+        <Button x:Name="btnExecute" Content="Execute" HorizontalAlignment="Left" Margin="205,265,0,0" VerticalAlignment="Top" Width="75" RenderTransformOrigin="0.067,-0.5"/>
+        <TextBox x:Name="tbQuestion" HorizontalAlignment="Left" Height="250" Margin="285,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="222" Text="Select Question." HorizontalScrollBarVisibility="Auto"/>
+        <TextBox x:Name="tbAnswer" HorizontalAlignment="Left" Height="20" Margin="285,265,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="222"/>
+        <ListView x:Name="lvQuestions" HorizontalAlignment="Left" Height="250" Margin="10,10,0,0" VerticalAlignment="Top" Width="270">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Question">

@@ -193,7 +193,93 @@ Public Class Question7
     Public Function Execute()
         Dim lngAnswer As Long, runstart As DateTime = Now(), elapsed As TimeSpan
 
+        Dim PrimeCounter As Long = 0, i As Long = 1
+        Do Until PrimeCounter = 10001
+            If IsPrime(i) Then PrimeCounter += 1
+            i += 1
+        Loop
+        lngAnswer = i - 1
 
+        elapsed = Now.Subtract(runstart)
+        Return lngAnswer.ToString() + " - Runtime: " + elapsed.TotalSeconds.ToString("0.00000")
+    End Function
+End Class
+
+Public Class Question8
+    Inherits Question
+    Public Sub New()
+        Me.Name = "8) Largest product in a series"
+        Me.Text = "The four adjacent digits in the 1000-digit number that have the greatest product are 9 × 9 × 8 × 9 = 5832." + vbNewLine + vbNewLine +
+            "Find the thirteen adjacent digits in the 1000-digit number that have the greatest product. What is the value of this product?" + vbNewLine + vbNewLine +
+            "(Number string omitted)"
+    End Sub
+    Public Function Execute()
+        Dim lngAnswer As Long, runstart As DateTime = Now(), elapsed As TimeSpan
+
+        Dim DigitSampleSize As Long = 13
+        Dim strNumberString As String =
+            "73167176531330624919225119674426574742355349194934" +
+"96983520312774506326239578318016984801869478851843" +
+"85861560789112949495459501737958331952853208805511" +
+"12540698747158523863050715693290963295227443043557" +
+"66896648950445244523161731856403098711121722383113" +
+"62229893423380308135336276614282806444486645238749" +
+"30358907296290491560440772390713810515859307960866" +
+"70172427121883998797908792274921901699720888093776" +
+"65727333001053367881220235421809751254540594752243" +
+"52584907711670556013604839586446706324415722155397" +
+"53697817977846174064955149290862569321978468622482" +
+"83972241375657056057490261407972968652414535100474" +
+"82166370484403199890008895243450658541227588666881" +
+"16427171479924442928230863465674813919123162824586" +
+"17866458359124566529476545682848912883142607690042" +
+"24219022671055626321111109370544217506941658960408" +
+"07198403850962455444362981230987879927244284909188" +
+"84580156166097919133875499200524063689912560717606" +
+"05886116467109405077541002256983155200055935729725" +
+"71636269561882670428252483600823257530420752963450"
+
+        Dim DigitStart As Long = 1, DigitSample As String, DigitSampleProduct As Long
+        For i = 1 To Len(strNumberString) - DigitSampleSize
+            DigitSample = Mid(strNumberString, i, DigitSampleSize)
+            DigitSampleProduct = MultipleString(DigitSample)
+            If DigitSampleProduct > lngAnswer Then
+                lngAnswer = DigitSampleProduct
+            End If
+        Next
+
+        elapsed = Now.Subtract(runstart)
+        Return lngAnswer.ToString() + " - Runtime: " + elapsed.TotalSeconds.ToString("0.00000")
+    End Function
+End Class
+
+Public Class Question9
+    Inherits Question
+    Public Sub New()
+        Me.Name = "9) Special Pythagorean triplet"
+        Me.Text = "A Pythagorean triplet is a set of three natural numbers, a < b < c, for which," + vbNewLine +
+                "a^2 + b^2 = c^2" + vbNewLine +
+                "For example, 3^2 + 4^2 = 9 + 16 = 25 = 5^2." + vbNewLine + vbNewLine +
+                "There exists exactly one Pythagorean triplet for which a + b + c = 1000." + vbNewLine +
+                "Find the product abc."
+    End Sub
+    Public Function Execute()
+        Dim lngAnswer As Long, runstart As DateTime = Now(), elapsed As TimeSpan
+        Dim a, b, c As Long
+
+        For a = 2 To 700
+            For b = a + 1 To 700
+                For c = b + 1 To 700
+                    If (a * a) + (b * b) = (c * c) Then
+                        If a + b + c = 1000 Then
+                            lngAnswer = a * b * c
+                            GoTo LeaveLoop
+                        End If
+                    End If
+                Next
+            Next
+        Next
+LeaveLoop:
 
         elapsed = Now.Subtract(runstart)
         Return lngAnswer.ToString() + " - Runtime: " + elapsed.TotalSeconds.ToString("0.00000")

@@ -16,7 +16,8 @@ Class MainWindow
         Dim qs As New Collection(Of Question)
         qs.Add(New Question1) : qs.Add(New Question2) : qs.Add(New Question3)
         qs.Add(New Question4) : qs.Add(New Question5) : qs.Add(New Question6)
-        qs.Add(New Question7)
+        qs.Add(New Question7) : qs.Add(New Question8) : qs.Add(New Question9)
+
         lvQuestions.ItemsSource = qs
     End Sub
 
@@ -25,6 +26,6 @@ Class MainWindow
     End Sub
 
     Private Sub btnExecute_Click(sender As Object, e As RoutedEventArgs) Handles btnExecute.Click
-        tbAnswer.Text = lvQuestions.Items(lvQuestions.SelectedIndex).Execute()
+        tbAnswer.Text = lvQuestions.Items(lvQuestions.SelectedIndex).Execute().ToString()
     End Sub
 End Class
