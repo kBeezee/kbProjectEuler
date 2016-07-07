@@ -146,22 +146,16 @@ What is the value of the first triangle number to have over five hundred divisor
     End Sub
     Public Function Execute()
         Dim lngAnswer As Long, runstart As DateTime = Now(), elapsed As TimeSpan
-
-
-
-        'https://www.youtube.com/watch?v=2JM2oImb9Qg
-        Dim t As Tuple
-
         Dim n As Long = 6, TriangleNumber As Long = 0
         Dim divs As Long = 0, div As Divisors
         'First make a triangle number
-
         Do Until divs > 500
             divs = 0 : TriangleNumber = 0
             For i = 1 To n
                 TriangleNumber += i
             Next
 
+            'and then get the divisors
             div = Nothing
             div = New Divisors(TriangleNumber)
             div.GetDivisors()

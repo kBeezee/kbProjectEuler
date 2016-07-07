@@ -37,6 +37,7 @@ Module EulerFunctions
     End Function
 
     Public Class Divisors
+        'https://www.youtube.com/watch?v=2JM2oImb9Qg
         Private lngDivisorCount As Long
         Private lngNumber As Long
         Private arrDivisors As Collection
