@@ -19,6 +19,7 @@ Class MainWindow
         qs.Add(New Question7) : qs.Add(New Question8) : qs.Add(New Question9)
 
         qs.Add(New Question10) : qs.Add(New Question11) : qs.Add(New Question12)
+        'qs.Add(New Question13)
 
         lvQuestions.ItemsSource = qs
     End Sub
