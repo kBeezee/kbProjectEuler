@@ -35,6 +35,13 @@ Module EulerFunctions
         Next
         Return answer
     End Function
+    Function Factorial(lngInput As Long) As Double
+        Dim lngOutput As Double = 1
+        For i = lngInput To 1 Step -1
+            lngOutput *= i
+        Next
+        Return lngOutput
+    End Function
 
     Public Class Divisors
         'https://www.youtube.com/watch?v=2JM2oImb9Qg

@@ -339,3 +339,29 @@ NOTE: Once the chain starts the terms are allowed to go above one million."
         Return lngAnswer.ToString() + " - Runtime: " + elapsed.TotalSeconds.ToString("0.00000")
     End Function
 End Class
+
+Public Class Question15
+    Inherits Question
+    Public Sub New()
+        Me.Name = "15) Lattice paths"
+        Me.Text = "Starting in the top left corner of a 2×2 grid, and only being able to move to the right and down, there are exactly 6 routes to the bottom right corner.
+
+https://projecteuler.net/problem=15 -- Picture
+
+How many such routes are there through a 20×20 grid?"
+    End Sub
+    Public Function Execute()
+        Dim lngAnswer As Long, runstart As DateTime = Now(), elapsed As TimeSpan
+
+        Dim h As Long = 20, w As Long = 20, semiFact As Double = 1
+        Dim lngOneDirectionStepsNeeded As Long = Factorial(h)
+        For i = h + w To w + 1 Step -1
+            semiFact *= i
+        Next
+
+        lngAnswer = semiFact / lngOneDirectionStepsNeeded
+
+        elapsed = Now.Subtract(runstart)
+        Return lngAnswer.ToString() + " - Runtime: " + elapsed.TotalSeconds.ToString("0.00000")
+    End Function
+End Class
