@@ -365,3 +365,76 @@ How many such routes are there through a 20×20 grid?"
         Return lngAnswer.ToString() + " - Runtime: " + elapsed.TotalSeconds.ToString("0.00000")
     End Function
 End Class
+
+Public Class Question16
+    Inherits Question
+    Public Sub New()
+        Me.Name = "16) Power digit sum"
+        Me.Text = "2^15 = 32768 and the sum of its digits is 3 + 2 + 7 + 6 + 8 = 26.
+
+What is the sum of the digits of the number 2^1000?"
+    End Sub
+    Public Function Execute()
+        Dim lngAnswer As Long, runstart As DateTime = Now(), elapsed As TimeSpan
+
+        Dim arrDigits As New List(Of Long)
+        arrDigits.Add(2) 'First number is the position (right left to right) and the 2nd number is the actual number
+
+        For i = 1 To 999
+            For n = 0 To arrDigits.Count - 1
+                arrDigits(n) *= 2
+            Next
+
+            For n = 0 To arrDigits.Count - 1
+                If arrDigits(n) > 9 Then
+                    If n < arrDigits.Count - 1 Then
+                        arrDigits(n + 1) += 1
+                    Else
+                        arrDigits.Add(1)
+                    End If
+                    arrDigits(n) -= 10
+                End If
+            Next
+        Next
+
+        For Each n In arrDigits
+            lngAnswer += n
+        Next
+
+        elapsed = Now.Subtract(runstart)
+        Return lngAnswer.ToString() + " - Runtime: " + elapsed.TotalSeconds.ToString("0.00000")
+    End Function
+End Class
+Public Class Question17
+    Inherits Question
+    Public Sub New()
+        Me.Name = "17) Number letter counts"
+        Me.Text = "If the numbers 1 to 5 are written out in words: one, two, three, four, five, then there are 3 + 3 + 5 + 4 + 4 = 19 letters used in total.
+
+If all the numbers from 1 to 1000 (one thousand) inclusive were written out in words, how many letters would be used?
+
+
+NOTE: Do not count spaces or hyphens. For example, 342 (three hundred and forty-two) contains 23 letters and 115 (one hundred and fifteen) contains 20 letters. 
+The use of 'AND' when writing out numbers is in compliance with British usage."
+
+    End Sub
+    Public Function Execute()
+        Dim lngAnswer As Long, runstart As DateTime = Now(), elapsed As TimeSpan
+
+
+        Dim dictNumbers As New Dictionary(Of Long, String)
+        dictNumbers.Add(1, "One")
+        dictNumbers.Add(2, "Two")
+        dictNumbers.Add(3, "Three")
+        dictNumbers.Add(4, "Four")
+        dictNumbers.Add(5, "Five")
+
+        For i = 1 To 5
+            lngAnswer += Len(dictNumbers(i))
+        Next
+
+
+        elapsed = Now.Subtract(runstart)
+        Return lngAnswer.ToString() + " - Runtime: " + elapsed.TotalSeconds.ToString("0.00000")
+    End Function
+End Class
