@@ -76,7 +76,8 @@
       <DependentUpon>Application.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="cQuestions 10-19.vb" />
+    <Compile Include="cQuestion 67.vb" />
+    <Compile Include="cQuestions 10-18.vb" />
     <Compile Include="cQuestions 1-9.vb" />
     <Compile Include="MainWindow.xaml.vb">
       <DependentUpon>MainWindow.xaml</DependentUpon>

@@ -421,20 +421,122 @@ The use of 'AND' when writing out numbers is in compliance with British usage."
     Public Function Execute()
         Dim lngAnswer As Long, runstart As DateTime = Now(), elapsed As TimeSpan
 
-
-        Dim dictNumbers As New Dictionary(Of Long, String)
-        dictNumbers.Add(1, "One")
-        dictNumbers.Add(2, "Two")
-        dictNumbers.Add(3, "Three")
-        dictNumbers.Add(4, "Four")
-        dictNumbers.Add(5, "Five")
-
-        For i = 1 To 5
-            lngAnswer += Len(dictNumbers(i))
+        'did this one awhile ago w/ vba, but used a library, tried to write my ownt his time, closes i could get.
+        Dim c As New ConvertToWords
+        For i = 1 To 1000
+            lngAnswer += Len(c.ConvertNumbersToWords(i))
         Next
 
 
         elapsed = Now.Subtract(runstart)
         Return lngAnswer.ToString() + " - Runtime: " + elapsed.TotalSeconds.ToString("0.00000")
     End Function
+End Class
+
+Public Class Question18
+    Inherits Question
+    Public Sub New()
+        Me.Name = "18) Maximum path sum I"
+        Me.Text = "By starting at the top of the triangle below and moving to adjacent numbers on the row below, the maximum total from top to bottom is 23.
+
+3
+7 4
+2 4 6
+8 5 9 3
+
+That is, 3 + 7 + 4 + 9 = 23.
+
+Find the maximum total from top to bottom of the triangle below:
+
+75
+95 64
+17 47 82
+18 35 87 10
+20 04 82 47 65
+19 01 23 75 03 34
+88 02 77 73 07 63 67
+99 65 04 28 06 16 70 92
+41 41 26 56 83 40 80 70 33
+41 48 72 33 47 32 37 16 94 29
+53 71 44 65 25 43 91 52 97 51 14
+70 11 33 28 77 73 17 78 39 68 17 57
+91 71 52 38 17 14 91 43 58 50 27 29 48
+63 66 04 68 89 53 67 30 73 16 69 87 40 31
+04 62 98 27 23 09 70 98 73 93 38 53 60 04 23
+
+NOTE: As there are only 16384 routes, it is possible to solve this problem by trying every route. However, Problem 67, is the same challenge with a triangle containing one-hundred rows; it cannot be solved by brute force, and requires a clever method! ;o)"
+    End Sub
+    Public Function Execute()
+        Dim lngAnswer As Long, runstart As DateTime = Now(), elapsed As TimeSpan
+
+        Dim nosys As New node_system
+        lngAnswer = nosys.RollUp()
+        nosys = Nothing
+
+        elapsed = Now.Subtract(runstart)
+        Return lngAnswer.ToString() + " - Runtime: " + elapsed.TotalSeconds.ToString("0.00000")
+    End Function
+
+    Private Class node_system
+        Private strDelimValue As String = " ", strDelimRank As String = "\"
+        Private strInput As String
+        Private arrPath(14, 14) As Long
+        Public Sub New()
+            'Optional strDelimValue As String = " ", Optional strDelimRank As String = "\"
+            strInput =
+"75\" & '1
+"95 64\" & '2
+"17 47 82\" &'3
+"18 35 87 10\" &'4
+"20 04 82 47 65\" &'5
+"19 01 23 75 03 34\" &'6
+"88 02 77 73 07 63 67\" &'7
+"99 65 04 28 06 16 70 92\" &'8
+"41 41 26 56 83 40 80 70 33\" &'9
+"41 48 72 33 47 32 37 16 94 29\" &'10
+"53 71 44 65 25 43 91 52 97 51 14\" &'11
+"70 11 33 28 77 73 17 78 39 68 17 57\" &'12
+"91 71 52 38 17 14 91 43 58 50 27 29 48\" &'13
+"63 66 04 68 89 53 67 30 73 16 69 87 40 31\" &'14
+"04 62 98 27 23 09 70 98 73 93 38 53 60 04 23" '15 x 15
+
+            Dim arrRank As String()
+            Dim arrValue As String()
+
+            arrRank = Split(strInput, strDelimRank)
+            For r = 0 To UBound(arrRank)
+                arrValue = Nothing
+                arrValue = Split(arrRank(r), " ")
+                For v = 0 To UBound(arrValue)
+                    If arrValue(v) = 0 Then arrValue(v) = vbNull
+                    arrPath(r, v) = arrValue(v)
+                Next
+            Next
+
+            arrRank = Nothing
+            arrValue = Nothing
+        End Sub
+
+        Public Function RollUp() As Long
+            Dim LargestValue As Long
+            Dim arrOutput(UBound(arrPath) - 1, UBound(arrPath, 2) - 1) As String
+
+            For i = 1 To UBound(arrPath)
+                For n = 0 To UBound(arrPath)
+                    If n = UBound(arrPath) - i Then
+                        For m = 0 To n
+                            LargestValue = arrPath(n + 1, m)
+                            If arrPath(n + 1, m + 1) > LargestValue Then LargestValue = arrPath(n + 1, m + 1)
+
+                            arrPath(n, m) += LargestValue
+                            LargestValue = 0
+                        Next
+                    End If
+                Next
+            Next
+
+            Return arrPath(0, 0)
+
+        End Function
+    End Class
 End Class
