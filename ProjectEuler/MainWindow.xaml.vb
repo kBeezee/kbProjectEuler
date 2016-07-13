@@ -22,6 +22,7 @@ Class MainWindow
         qs.Add(New Question13) : qs.Add(New Question14) : qs.Add(New Question15)
         qs.Add(New Question16) : qs.Add(New Question17) : qs.Add(New Question18) : qs.Add(New Question67)
 
+        qs.Add(New Question19)
 
         'qs.Add(New Question13)
 
